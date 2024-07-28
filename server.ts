@@ -25,9 +25,9 @@ async function run() {
     process.env.NODE_ENV === "development"
       ? await createDevRequestHandler(initialBuild)
       : createRequestHandler({
-          build: initialBuild,
-          mode: initialBuild.mode,
-        });
+        build: initialBuild,
+        mode: initialBuild.mode,
+      });
 
   const app = express();
   const metricsApp = express();
@@ -94,7 +94,11 @@ async function run() {
 
   // Everything else (like favicon.ico) is cached for an hour. You may want to be
   // more aggressive with this caching.
-  app.use(express.static("public", { maxAge: "1h" }));
+  app.use(
+    express.static("public", {
+      maxAge: process.env.NODE_ENV === "development" ? "10" : "1h",
+    }),
+  );
 
   app.use(morgan("tiny"));
 
