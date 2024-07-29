@@ -10,12 +10,12 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
+import { useTranslation } from "react-i18next";
 
 import { getUser } from "~/session.server";
 import stylesheet from "~/tailwind.css";
 
 import i18next from "./i18next.server";
-import { useTranslation } from "react-i18next";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },

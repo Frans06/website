@@ -1,8 +1,6 @@
 import {
   MeshPortalMaterial,
-  PerspectiveCamera,
   Plane,
-  Scroll,
   ScrollControls,
   Stars,
   Text,
@@ -18,7 +16,7 @@ import {
   context as fiberContext,
 } from "@react-three/fiber";
 import type { MetaFunction } from "@remix-run/node";
-import { Link, useNavigate, useSearchParams } from "@remix-run/react";
+import { useNavigate, useSearchParams } from "@remix-run/react";
 import { easing } from "maath";
 import {
   ReactNode,
@@ -31,21 +29,14 @@ import {
 } from "react";
 import * as ReactDOM from "react-dom/client";
 import { useTranslation } from "react-i18next";
-import {
-  DoubleSide,
-  Vector3,
-  PerspectiveCamera as PerspectiveCameraImpl,
-} from "three";
-
 import { FiMenu } from "react-icons/fi";
+import { DoubleSide, Vector3 } from "three";
+
 export const meta: MetaFunction = () => [{ title: "Remix Notes" }];
 
 function Frame({
   identifier,
   name,
-  bg,
-  width = 1,
-  height = 1.61803398875,
   children,
   ...props
 }: {
@@ -99,7 +90,6 @@ function Frame({
         <planeGeometry />
         <MeshPortalMaterial ref={portal} side={DoubleSide}>
           <ambientLight />
-          <color attach="background" args={["white"]} />
           {children}
         </MeshPortalMaterial>
       </mesh>
@@ -201,8 +191,8 @@ export default function Index() {
   const links = [
     { id: "0", content: t("home.projects.title") },
     { id: "1", content: t("home.blog.title") },
-    { id: "2", content: t("home.fun.title") },
-    { id: "3", content: t("home.me.title") },
+    { id: "2", content: t("home.me.title") },
+    { id: "3", content: t("home.fun.title") },
   ];
   const navigate = useNavigate();
   return (
@@ -273,10 +263,10 @@ export default function Index() {
             {({ scrollPos }) => (
               <div className={"absolute top-0 flex h-svh w-svw"}>
                 <div className="lg:flex text-white absolute  bottom-0 left-1/2 -translate-x-1/2 max-w-7xl border-t-2 border-x-2 bg-gray-600/60  border-white h-16 w-full overflow-hidden rounded-t-full hidden">
-                  {links.map((link) => {
+                  {links.map((link, key) => {
                     return (
                       <button
-                        className="lg:text-2xl text-lg flex flex-1 justify-center h-full items-center"
+                        className={`lg:text-2xl text-lg flex flex-1 justify-center h-full items-center ${Math.floor(scrollPos * 4) === key ? "bg-gray-600" : "bg-transparent"}`}
                         onClick={() => navigate({ search: `?id=${link.id}` })}
                         key={link.id}
                       >
@@ -287,7 +277,7 @@ export default function Index() {
                 </div>
                 <div
                   className={
-                    "flex sm:hidden text-white items-center justify-center rounded-full h-16 w-16 border-white border-4 left-4 top-4"
+                    "flex absolute sm:hidden text-white items-center justify-center rounded-full h-16 w-16 border-white border-2  bg-gray-600/60 right-4 top-4"
                   }
                 >
                   <FiMenu className="h-8 w-8" />
