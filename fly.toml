@@ -1,8 +1,8 @@
 app = "webpage"
 kill_signal = "SIGINT"
 kill_timeout = 5
-processes = []
 swap_size_mb = 512
+primary_region = "yyz"
 
 [env]
 PORT = "8080"
@@ -54,3 +54,8 @@ protocol = "http"
 timeout = "2s"
 tls_skip_verify = false
 headers = {}
+
+[[vm]]
+size = "shared-cpu-1x"
+memory = "1gb"
+cpus = 1
