@@ -57,5 +57,5 @@ headers = {}
 
 [[vm]]
 size = "shared-cpu-1x"
-memory = "1gb"
+memory = "512mb"
 cpus = 1
