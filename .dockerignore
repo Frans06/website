@@ -1,0 +1,33 @@
+# Ignore target directory (Rust build artifacts)
+target
+
+# Ignore node_modules if using npm for frontend assets
+node_modules
+
+# Ignore local dev tools and editor config files
+**/*.swp
+**/*.swo
+*.rs.bk
+*.toml.bk
+*.lock.bk
+.DS_Store
+.idea
+.vscode
+*.log
+
+# Ignore Git and build output
+.git
+.gitignore
+.dockerignore
+
+# Ignore Leptos build artifacts (if you build frontend separately)
+pkg
+dist
+
+# Ignore environment files (only if you handle envs differently in production)
+.env
+.env.*
+
+# Ignore OS-specific files
+Thumbs.db
+ehthumbs.db
