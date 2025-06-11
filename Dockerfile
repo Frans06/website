@@ -1,13 +1,12 @@
 # Get started with a build env with Rust nightly
 FROM rustlang/rust:nightly-alpine AS builder
-
+ENV RUSTFLAGS="-C target-feature=-crt-static"
 RUN apk update && \
-  apk add --no-cache bash curl npm libc-dev binaryen libpq
+  apk add --no-cache bash curl npm libc-dev binaryen postgresql-dev
 
 RUN npm install -g sass
 
 RUN curl --proto '=https' --tlsv1.3 -LsSf https://github.com/leptos-rs/cargo-leptos/releases/latest/download/cargo-leptos-installer.sh | sh
-
 # Add the WASM target
 RUN rustup target add wasm32-unknown-unknown
 
@@ -17,6 +16,9 @@ COPY . .
 RUN cargo leptos build --release -vv
 
 FROM rustlang/rust:nightly-alpine AS runner
+RUN apk update && \
+  apk add bash libc-dev binaryen postgresql-dev
+
 
 WORKDIR /app
 
