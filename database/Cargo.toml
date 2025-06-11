@@ -1,0 +1,23 @@
+[package]
+name = "database"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = []
+ssr = []
+
+[lints]
+workspace = true
+
+[dependencies]
+serde.workspace = true
+url.workspace = true
+chrono.workspace = true
+uuid.workspace = true
+tokio.workspace = true
+# backend-only deps
+[target.'cfg(not(target_family = "wasm"))'.dependencies]
+diesel = { workspace = true, features = ["chrono", "postgres"] }
+diesel-async.workspace = true
+diesel_migrations = "2.2.0"

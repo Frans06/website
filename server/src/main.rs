@@ -1,16 +1,22 @@
+use app::*;
 use axum::Router;
+use config::CONFIG;
+use database::connection::{create_conection, run_migrations};
+use leptos::logging::log;
 use leptos::prelude::*;
 use leptos_axum::{generate_route_list, LeptosRoutes};
-use app::*;
-use leptos::logging::log;
 
 #[tokio::main]
 async fn main() {
-
     let conf = get_configuration(None).unwrap();
     let addr = conf.leptos_options.site_addr;
     let leptos_options = conf.leptos_options;
     // Generate the list of routes in your Leptos App
+    log!("Running migrations ...");
+    let mut connection = create_conection(&CONFIG.database.url);
+    run_migrations(&mut connection).await.unwrap();
+    log!("Migrations run successfully");
+
     let routes = generate_route_list(App);
 
     let app = Router::new()
