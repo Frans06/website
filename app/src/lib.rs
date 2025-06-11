@@ -116,7 +116,7 @@ pub fn App() -> impl IntoView {
     provide_meta_context();
 
     view! {
-        <Stylesheet id="leptos" href="/pkg/start-axum-workspace.css"/>
+        <Stylesheet id="leptos" href="/pkg/webpage.css"/>
         // sets the document title
         <Title text="Frans Ramirez Neyra - Software Engineer"/>
 
@@ -363,6 +363,7 @@ fn ExperienceCard(
             <p class="text-gray-300 leading-relaxed">{description}</p>
         </div>
     }
+    .into_any()
 }
 
 #[component]
@@ -447,7 +448,7 @@ fn ContactSection() -> impl IntoView {
                         "Send Message"
                     </a>
                     <div class="text-gray-400">
-                        "Toronto, Ontario • (437) 661 3660"
+                        "Toronto, Ontario - (437) 661 3660"
                     </div>
                 </div>
             </div>
