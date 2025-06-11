@@ -5,97 +5,14 @@ use leptos_router::{
     StaticSegment,
 };
 
+mod components;
+use components::background::Background;
+
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
         <!DOCTYPE html>
         <html lang="en">
             <head>
-            <style>
-                "
-                @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
-                
-                :root {
-                    --space-blue: #0f1419;
-                    --cosmic-purple: #6366f1;
-                    --star-white: #f8fafc;
-                    --nebula-pink: #ec4899;
-                    --plasma-cyan: #06b6d4;
-                }
-
-                body {
-                    background: linear-gradient(135deg, #0f1419 0%, #1e293b 50%, #0f172a 100%);
-                    font-family: 'Inter', sans-serif;
-                    overflow-x: hidden;
-                }
-
-                .orbitron {
-                    font-family: 'Orbitron', monospace;
-                }
-
-                .stars {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    pointer-events: none;
-                    z-index: -1;
-                }
-
-                .star {
-                    position: absolute;
-                    background: white;
-                    border-radius: 50%;
-                    animation: twinkle 2s infinite alternate;
-                }
-
-                @keyframes twinkle {
-                    0% { opacity: 0.3; transform: scale(1); }
-                    100% { opacity: 1; transform: scale(1.2); }
-                }
-
-                .floating {
-                    animation: float 6s ease-in-out infinite;
-                }
-
-                @keyframes float {
-                    0%, 100% { transform: translateY(0px); }
-                    50% { transform: translateY(-20px); }
-                }
-
-                .glow {
-                    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
-                }
-
-                .neon-border {
-                    border: 2px solid;
-                    border-image: linear-gradient(45deg, #06b6d4, #6366f1, #ec4899) 1;
-                    position: relative;
-                }
-
-                .card-hover {
-                    transition: all 0.3s ease;
-                    backdrop-filter: blur(10px);
-                    background: rgba(15, 23, 42, 0.7);
-                    border: 1px solid rgba(99, 102, 241, 0.2);
-                }
-
-                .card-hover:hover {
-                    transform: translateY(-5px);
-                    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
-                    border-color: rgba(99, 102, 241, 0.5);
-                }
-
-                .pulse-glow {
-                    animation: pulse-glow 2s infinite;
-                }
-
-                @keyframes pulse-glow {
-                    0%, 100% { box-shadow: 0 0 20px rgba(6, 182, 212, 0.3); }
-                    50% { box-shadow: 0 0 40px rgba(6, 182, 212, 0.6); }
-                }
-                "
-            </style>
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <meta name="description" content="Expert Fullstack Software Engineer specializing in modern web technologies"/>
@@ -135,23 +52,8 @@ pub fn App() -> impl IntoView {
 #[component]
 fn HomePage() -> impl IntoView {
     view! {
+        <Background />
         <div class="min-h-screen text-white">
-            <div class="stars">
-                {(0..50).map(|i| view! {
-                    <div
-                        class="star"
-                        style=format!(
-                            "left: {}%; top: {}%; width: {}px; height: {}px; animation-delay: {}s;",
-                            (i * 17) % 100,
-                            (i * 23) % 100,
-                            1 + (i % 3),
-                            1 + (i % 3),
-                            (i as f32) * 0.1
-                        )
-                    ></div>
-                }).collect::<Vec<_>>()}
-            </div>
-
             <main class="relative z-10">
                 <HeroSection/>
                 <AboutSection/>
@@ -171,7 +73,7 @@ fn HeroSection() -> impl IntoView {
         <section class="min-h-screen flex items-center justify-center px-4 relative">
             <div class="text-center floating">
                 <div class="mb-8">
-                    <h1 class="orbitron text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 mb-4">
+                    <h1 class="courier text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 mb-4">
                         "FRANS RAMIREZ NEYRA"
                     </h1>
                     <div class="h-1 w-32 mx-auto bg-gradient-to-r from-cyan-400 to-purple-500 mb-8"></div>
@@ -216,7 +118,7 @@ fn AboutSection() -> impl IntoView {
     view! {
         <section class="py-20 px-4">
             <div class="max-w-6xl mx-auto">
-                <h2 class="orbitron text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">
+                <h2 class="courier text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">
                     "MISSION PROFILE"
                 </h2>
                 <div class="card-hover rounded-2xl p-8">
@@ -237,7 +139,7 @@ fn SkillsSection() -> impl IntoView {
     view! {
         <section class="py-20 px-4">
             <div class="max-w-6xl mx-auto">
-                <h2 class="orbitron text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
+                <h2 class="courier text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
                     "TECHNICAL ARSENAL"
                 </h2>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -257,7 +159,7 @@ fn SkillsSection() -> impl IntoView {
 fn SkillCard(title: &'static str, skills: Vec<&'static str>) -> impl IntoView {
     view! {
         <div class="card-hover rounded-xl p-6">
-            <h3 class="orbitron text-xl font-bold mb-4 text-cyan-400">{title}</h3>
+            <h3 class="courier text-xl font-bold mb-4 text-cyan-400">{title}</h3>
             <div class="flex flex-wrap gap-2">
                 {skills.into_iter().map(|skill| view! {
                     <span class="px-3 py-1 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 rounded-full text-sm border border-purple-500/30 text-gray-300">
@@ -274,7 +176,7 @@ fn ExperienceSection() -> impl IntoView {
     view! {
         <section class="py-20 px-4">
             <div class="max-w-6xl mx-auto">
-                <h2 class="orbitron text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-400">
+                <h2 class="courier text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-400">
                     "MISSION HISTORY"
                 </h2>
                 <div class="space-y-8">
@@ -352,7 +254,7 @@ fn ExperienceCard(
         <div class="card-hover rounded-xl p-8">
             <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
                 <div>
-                    <h3 class="orbitron text-2xl font-bold text-cyan-400 mb-1">{company}</h3>
+                    <h3 class="courier text-2xl font-bold text-cyan-400 mb-1">{company}</h3>
                     <h4 class="text-lg font-semibold text-purple-400">{position}</h4>
                 </div>
                 <div class="text-right">
@@ -371,12 +273,12 @@ fn ResearchSection() -> impl IntoView {
     view! {
         <section class="py-20 px-4">
             <div class="max-w-6xl mx-auto">
-                <h2 class="orbitron text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+                <h2 class="courier text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
                     "RESEARCH EXPEDITIONS"
                 </h2>
                 <div class="space-y-8">
                     <div class="card-hover rounded-xl p-8">
-                        <h3 class="orbitron text-2xl font-bold text-cyan-400 mb-2">McGill University</h3>
+                        <h3 class="courier text-2xl font-bold text-cyan-400 mb-2">McGill University</h3>
                         <h4 class="text-lg font-semibold text-purple-400 mb-2">Research Intern</h4>
                         <p class="text-gray-400 mb-4">2016 - Montreal, Canada</p>
                         <p class="text-gray-300 leading-relaxed">
@@ -385,7 +287,7 @@ fn ResearchSection() -> impl IntoView {
                         </p>
                     </div>
                     <div class="card-hover rounded-xl p-8">
-                        <h3 class="orbitron text-2xl font-bold text-cyan-400 mb-2">ITESM</h3>
+                        <h3 class="courier text-2xl font-bold text-cyan-400 mb-2">ITESM</h3>
                         <h4 class="text-lg font-semibold text-purple-400 mb-2">Project Investigator</h4>
                         <p class="text-gray-400 mb-4">2016 - Toluca, Mexico</p>
                         <p class="text-gray-300 leading-relaxed">
@@ -404,12 +306,12 @@ fn EducationSection() -> impl IntoView {
     view! {
         <section class="py-20 px-4">
             <div class="max-w-6xl mx-auto">
-                <h2 class="orbitron text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">
+                <h2 class="courier text-4xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">
                     "ACADEMIC ACHIEVEMENTS"
                 </h2>
                 <div class="card-hover rounded-xl p-8 text-center">
                     <div class="mb-6">
-                        <h3 class="orbitron text-3xl font-bold text-cyan-400 mb-2">Tecnológico de Monterrey</h3>
+                        <h3 class="courier text-3xl font-bold text-cyan-400 mb-2">Tecnológico de Monterrey</h3>
                         <h4 class="text-xl font-semibold text-purple-400 mb-2">B.S. in Mechatronics & Engineering</h4>
                         <p class="text-gray-400">December 2016</p>
                     </div>
@@ -432,7 +334,7 @@ fn ContactSection() -> impl IntoView {
     view! {
         <section class="py-20 px-4">
             <div class="max-w-4xl mx-auto text-center">
-                <h2 class="orbitron text-4xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-cyan-400">
+                <h2 class="courier text-4xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-cyan-400">
                     "INITIATE CONTACT"
                 </h2>
                 <p class="text-xl text-gray-300 mb-12">
