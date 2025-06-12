@@ -78,6 +78,94 @@
   border-color: rgba(99, 102, 241, 0.5);
 }
 
+.markdown-body {
+  background-color: var(--color-space-blue);
+  color: var(--color-star-white);
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+  padding: 2rem;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  color: var(--color-plasma-cyan);
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+.markdown-body a {
+  color: var(--color-cosmic-purple);
+  text-decoration: underline;
+}
+
+.markdown-body a:hover {
+  color: var(--color-nebula-pink);
+}
+
+.markdown-body code,
+.markdown-body pre {
+  font-family: "Fira Code", monospace;
+  background-color: #1e293b; /* dark navy for contrast */
+  color: var(--color-star-white);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+
+.markdown-body pre {
+  padding: 1em;
+  overflow: auto;
+}
+
+.markdown-body blockquote {
+  border-left: 4px solid var(--color-cosmic-purple);
+  padding-left: 1em;
+  color: #e2e8f0;
+  margin: 1em 0;
+  background-color: #1f2937;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 2em;
+  margin-bottom: 1em;
+}
+
+.markdown-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  background-color: #1f2937;
+  color: var(--color-star-white);
+}
+
+.markdown-body th,
+.markdown-body td {
+  border: 1px solid #334155;
+  padding: 0.5em 1em;
+}
+
+.markdown-body hr {
+  border: none;
+  border-top: 1px solid #334155;
+  margin: 2em 0;
+}
+
+.markdown-body strong {
+  color: var(--color-nebula-pink);
+}
+
+.markdown-body img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1em 0;
+}
+
 .pulse-glow {
   animation: var(--animate-pulse-glow);
 }

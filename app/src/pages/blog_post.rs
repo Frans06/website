@@ -2,42 +2,21 @@ use leptos::prelude::*;
 use leptos_router::components::A;
 use leptos_router::hooks::use_params_map;
 
-#[derive(Clone)]
-struct BlogPostData {
-    slug: String,
-    title: String,
-    excerpt: String,
-    category: String,
-    date: String,
-    read_time: String,
-}
+use crate::posts::{get_post, BlogPostData};
+
 #[component]
 pub fn BlogPost() -> impl IntoView {
     let params = use_params_map();
     let slug = move || params.with(|params| params.get("slug").clone().unwrap_or_default());
 
     // Mock blog post content - in real app, this would fetch from a CMS or database
-    let get_post_content = move |slug: String| -> Option<BlogPostData> {
-        match slug.as_str() {
-            "rust-performance-optimization" => Some(BlogPostData {
-                slug: slug.clone(),
-                title: "Rust Performance Optimization in Production".to_string(),
-                excerpt:
-                    "Deep dive into optimizing Rust applications for high-performance web services"
-                        .to_string(),
-                category: "Rust".to_string(),
-                date: "December 15, 2024".to_string(),
-                read_time: "8 min read".to_string(),
-            }),
-            _ => None,
-        }
-    };
 
     view! {
         <div class="pt-32 pb-20 px-4">
             <div class="max-w-4xl mx-auto">
                 {move || {
-                    if let Some(post) = get_post_content(slug()) {
+                    if let Some(post) = get_post(&slug()) {
+                        let iternal_post = post.clone();
                         view! {
                             <article>
                                 <header class="mb-12">
@@ -67,7 +46,7 @@ pub fn BlogPost() -> impl IntoView {
                                 </header>
 
                                 <div class="prose prose-invert prose-lg max-w-none">
-                                    <BlogContent/>
+                                    <BlogContent post=iternal_post/>
                                 </div>
                             </article>
                         }.into_any()
@@ -91,32 +70,11 @@ pub fn BlogPost() -> impl IntoView {
 }
 
 #[component]
-fn BlogContent() -> impl IntoView {
+fn BlogContent(post: BlogPostData) -> impl IntoView {
+    let info = markdown::to_html_with_options(&post.content, &markdown::Options::gfm())
+        .unwrap_or_default();
     view! {
-        <div class="card-hover rounded-xl p-8 space-y-6">
-            <p class="text-lg text-gray-300 leading-relaxed">
-                "Performance optimization in Rust requires understanding both the language's unique features and the underlying system architecture. In this post, we'll explore advanced techniques for building high-performance web services."
-            </p>
-
-            <h2 class="orbitron text-2xl font-bold text-cyan-400 mt-8 mb-4">"Memory Management Strategies"</h2>
-            <p class="text-gray-300 leading-relaxed">
-                "Rust's ownership system provides zero-cost abstractions, but understanding when and how to use different allocation strategies can significantly impact performance. We'll cover stack vs heap allocation, custom allocators, and memory pooling techniques."
-            </p>
-
-            <h2 class="orbitron text-2xl font-bold text-cyan-400 mt-8 mb-4">"Async Performance Patterns"</h2>
-            <p class="text-gray-300 leading-relaxed">
-                "Modern web services rely heavily on asynchronous programming. We'll examine Tokio runtime tuning, efficient task spawning, and avoiding common async pitfalls that can degrade performance."
-            </p>
-
-            <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
-                <h3 class="orbitron text-lg font-bold text-purple-400 mb-3">"Key Takeaways"</h3>
-                <ul class="list-disc list-inside text-gray-300 space-y-2">
-                    <li>"Profile before optimizing - use tools like perf and flamegraph"</li>
-                    <li>"Understand your allocation patterns and minimize heap usage"</li>
-                    <li>"Choose the right async runtime configuration for your workload"</li>
-                    <li>"Leverage Rust's type system for compile-time optimizations"</li>
-                </ul>
-            </div>
-        </div>
+        <div class="markdown-body card-hover rounded-xl p-8 space-y-6" inner_html=info >
+                    </div>
     }
 }

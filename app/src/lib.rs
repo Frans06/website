@@ -7,6 +7,8 @@ use leptos_router::{
 
 mod components;
 mod pages;
+mod posts;
+
 use components::background::Background;
 
 use crate::{

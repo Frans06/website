@@ -1,6 +1,8 @@
 use leptos::prelude::*;
 use leptos_router::components::A;
 
+use crate::posts::{get_posts, BlogPostData};
+
 #[component]
 pub fn BlogPage() -> impl IntoView {
     view! {
@@ -27,40 +29,7 @@ fn BlogGrid() -> impl IntoView {
     let (search_term, set_search_term) = signal(String::new());
     let (selected_category, set_selected_category) = signal("All".to_string());
 
-    let blog_posts = vec![
-        BlogPostData {
-            slug: "rust-performance-optimization".to_string(),
-            title: "Rust Performance Optimization in Production".to_string(),
-            excerpt: "Deep dive into optimizing Rust applications for high-performance web services, covering memory management, async patterns, and profiling techniques.".to_string(),
-            category: "Rust".to_string(),
-            date: "2024-12-15".to_string(),
-            read_time: "8 min read".to_string(),
-        },
-        BlogPostData {
-            slug: "serverless-architecture-aws".to_string(),
-            title: "Building Scalable Serverless Architecture on AWS".to_string(),
-            excerpt: "Lessons learned from architecting serverless solutions using Lambda, DynamoDB, and API Gateway for enterprise applications.".to_string(),
-            category: "Cloud".to_string(),
-            date: "2024-11-28".to_string(),
-            read_time: "12 min read".to_string(),
-        },
-        BlogPostData {
-            slug: "machine-learning-production".to_string(),
-            title: "Deploying ML Models to Production at Scale".to_string(),
-            excerpt: "From Jupyter notebooks to production: A comprehensive guide to MLOps, model versioning, and real-time inference systems.".to_string(),
-            category: "Machine Learning".to_string(),
-            date: "2024-11-10".to_string(),
-            read_time: "15 min read".to_string(),
-        },
-        BlogPostData {
-            slug: "typescript-advanced-patterns".to_string(),
-            title: "Advanced TypeScript Patterns for Large Codebases".to_string(),
-            excerpt: "Exploring advanced TypeScript techniques including conditional types, template literals, and architectural patterns for maintainable code.".to_string(),
-            category: "TypeScript".to_string(),
-            date: "2024-10-22".to_string(),
-            read_time: "10 min read".to_string(),
-        },
-    ];
+    let blog_posts = get_posts();
 
     let categories = vec!["All", "Rust", "Cloud", "Machine Learning", "TypeScript"];
 
@@ -135,16 +104,6 @@ fn BlogGrid() -> impl IntoView {
             </div>
         </div>
     }
-}
-
-#[derive(Clone)]
-struct BlogPostData {
-    slug: String,
-    title: String,
-    excerpt: String,
-    category: String,
-    date: String,
-    read_time: String,
 }
 
 #[component]
