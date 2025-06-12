@@ -22,9 +22,7 @@ pub fn NavigationBar() -> impl IntoView {
                     // Logo
                     <div class="flex-shrink-0">
                         <A href="/">
-            <p class="orbitron text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
-                            "FRN"
-            </p>
+                           <image src="/logo.png" class="flex h-10 w-10 object-contain" />
                         </A>
                     </div>
 

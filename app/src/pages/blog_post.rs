@@ -40,7 +40,7 @@ pub fn BlogPost() -> impl IntoView {
                                         <span class="text-gray-400">{post.read_time}</span>
                                     </div>
 
-                                    <h1 class="orbitron text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-6">
+                                    <h1 class="courier text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-6">
                                         {post.title}
                                     </h1>
                                 </header>
@@ -53,7 +53,7 @@ pub fn BlogPost() -> impl IntoView {
                     } else {
                         view! {
                             <div class="text-center">
-                                <h1 class="orbitron text-4xl font-bold text-red-400 mb-4">"404 - Post Not Found"</h1>
+                                <h1 class="courier text-4xl font-bold text-red-400 mb-4">"404 - Post Not Found"</h1>
                                 <p class="text-gray-300 mb-8">"The blog post you're looking for doesn't exist."</p>
                                 <A href="/blog" >
                                 <p class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-full hover:from-purple-500 hover:to-cyan-500 transition-all duration-300 font-semibold">

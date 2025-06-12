@@ -9,7 +9,7 @@ pub fn BlogPage() -> impl IntoView {
         <div class="pt-32 pb-20 px-4">
             <div class="max-w-6xl mx-auto">
                 <div class="text-center mb-16">
-                    <h1 class="orbitron text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-4">
+                    <h1 class="courier text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-4">
                         "ENGINEERING LOG"
                     </h1>
                     <p class="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -119,7 +119,7 @@ fn BlogPostCard(post: BlogPostData) -> impl IntoView {
                     <span class="text-gray-500 text-sm">{post.date}</span>
                 </div>
 
-                <h3 class="orbitron text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
+                <h3 class="courier text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
                     {post.title}
                 </h3>
 
