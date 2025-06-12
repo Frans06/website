@@ -21,6 +21,7 @@
 .body {
   font-family: var(--font-family-inter);
   background-color: #0f172a;
+  scroll-behavior: smooth;
 }
 /* Base styles */
 .background-surface {

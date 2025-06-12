@@ -18,7 +18,7 @@ style = { level = "deny", priority = -1 }
 suspicious = { level = "deny", priority = -1 }
 
 [workspace.dependencies]
-leptos = { version = "0.8.2", features = ["nightly"] }
+leptos = { version = "0.8.2", features = ["nightly", "islands"] }
 leptos_meta = { version = "0.8.2" }
 leptos_router = { version = "0.8.2", features = ["nightly"] }
 leptos_axum = { version = "0.8.2" }
