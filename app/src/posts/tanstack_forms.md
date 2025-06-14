@@ -143,9 +143,17 @@ You can use the custom `Input` like this in your form definition:
 
 This setup offers a clean separation between **form logic** and **presentation**, making the form system:
 
+### PROPS
+
 - Easy to maintain
 - Visually consistent
 - Extensible for custom layouts and fields
+
+### CONS
+
+- Lots of boilerplates. Every Field will require the whole generics completion.
+- More code to think about. Although it if code you will do once de field type and forget about the <form.Field></form.Field> dynamic.
+- Needs more testing.
 
 You can apply this same pattern to create `Select`, `Checkbox`, `Textarea`, etc., each using `InputLayout` for shared UX elements.
 
